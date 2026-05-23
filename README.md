@@ -172,11 +172,11 @@ PaedOx QP is available as of Version 6.9 and supports the following types of SVM
 Comparisons to MATLAB L1QP (quadprog) and other methods are below. Note that MATLAB quadprog uses an interior point method for SVM and so operates differently to PaedOx QP.
 
 ### Algorithm
-PaedOx QP combines Alternating Direction Method of Multipliers (ADMM) and a polishing step, and so is similar in spirit to [OSQP](https://osqp.org/). PaedOx QP supports box- and equality-constrained QPs.
+PaedOx QP combines Alternating Direction Method of Multipliers (ADMM) and a polishing solve, and so is similar in spirit to [OSQP](https://osqp.org/). PaedOx QP supports box- and equality-constrained QPs.
 
-PaedOx QP is slower and more memory-intensive than decomposition methods such as SMO and ISDA, so it is not intended for large datasets. It is best suited to problems with at most a few thousand training examples. For smaller datasets, it can produce solutions with strong primal feasibility and near machine-precision optimality.
+PaedOx QP is slower and more memory-intensive than decomposition methods such as SMO and ISDA, so it is not intended for large datasets. It is best suited to problems with at most a few thousand training examples. For smaller datasets, it can produce solutions with strong primal feasibility and machine-precision optimality.
 
-PaedOx QP solves iterateively until primal and dual residuals are simultaneously below a set tolerance. This is used to infer which coordinates are at the box bounds, after which a reduced equality-constrained QP is solved over the remaining free variables. This polishing step improves the solution to near machine precision. Polishing is successful if (1) all coordinates remain within the box, and (2) both primal and dual residuals are less than those of pre-polished solution. If polishing is not successful, the pre-polished solution is used instead.
+PaedOx QP solves iterateively until primal and dual residuals are simultaneously less than a preset tolerance. This is used to infer which coordinates are at the box bounds, after which a reduced equality-constrained QP is solved over the remaining free variables. This polishing step improves the solution to machine precision. Polishing is successful if (1) all coordinates remain within the box, and (2) both primal and dual residuals are less than those of solution prior to polishing. If polishing is not successful, the solution prior to polishing is used instead.
 
 ### Experiment 4
 This experiment runs PaedOx QP on the problem posed in Experiment 3. Other solver results are re-used.
@@ -206,7 +206,7 @@ This experiment is a head-to-head comparison using a large dataset containing da
 - Standardization: $z = \frac{x - \mu}{\sigma}$
 - Stopping criterion (SMO): $G(I_{\mathrm{up}}) - G(I_{\mathrm{low}}) < 0.001$
 - Stopping criterion (ISDA): Maximum KKT Violation $< 0.001$
-- Stopping criterion (PaedOx QP): ‖x<sup>k+1</sup> − z<sup>k+1</sup>‖<sub>∞</sub> ≤ 10<sup>−3</sup> and ρ ‖z<sup>k+1</sup> − z<sup>k</sup>‖<sub>∞</sub> ≤ 10<sup>−3</sup>
+- Stopping criterion (PaedOx QP): ‖x<sup>k+1</sup> − z<sup>k+1</sup>‖<sub>∞</sub> < 0.001 and ρ ‖z<sup>k+1</sup> − z<sup>k</sup>‖<sub>∞</sub> < 0.001
 
 MATLAB and LIBSVM solvers configured as above, with relevant changes to C.
 
