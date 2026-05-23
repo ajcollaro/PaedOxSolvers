@@ -5,7 +5,7 @@ Support Vector Machines (SVMs) are the recommended predictive model for the Paed
 
 See Experiment 5 for a head-to-head across PaedOx and other solvers on a large regression problem.
 
-TL;DR: PaedOx SMO is the recommended solver for the platform. For smaller datasets, PaedOx QP provides more precise solution.
+Summary: PaedOx SMO is the recommended solver for the platform. For smaller datasets, PaedOx QP provides more a precise solution.
 
 ## Sequential Minimal Optimization
 PaedOx SMO is recommended for most use-cases and supports several types of SVM through different problem encodings:
@@ -214,12 +214,12 @@ MATLAB and LIBSVM solvers configured as above, with relevant changes to C.
 Outputs are located within the 'Experiment 5' folder. Middle portions of PaedOx ISDA log are removed to reduce file size. MATLAB ISDA log omitted due to size.
 
 | Solver | Iterations | Support Vectors | Objective | Rho (ρ) | Note
-|-----------|------------|------------|------------|------------|
-| **MATLAB SMO** | 58,429 | 4,573 | -3998822.54687 | -50.174433278612604* |
-| **MATLAB ISDA** | 2,222,127 | 4,572 | -4005889.66636| -28.038084931358030* |
-| **LIBSVM SMO** | 63,202 | 4,573 | -3998825.062475 | -50.174449 |
-| **PaedOx SMO** | 63,718 | 4,573 | -3998822.551904961 | -50.17419408734025 |
-| **PaedOx ISDA** | 2,222,127 | 4,572 | -4005889.66636264 | -28.038084931308095 |
+|-----------|------------|------------|------------|------------|------------|
+| **MATLAB SMO** | 58,429 | 4,573 | -3998822.54687 | -50.174433278612604* | |
+| **MATLAB ISDA** | 2,222,127 | 4,572 | -4005889.66636| -28.038084931358030* | |
+| **LIBSVM SMO** | 63,202 | 4,573 | -3998825.062475 | -50.174449 | |
+| **PaedOx SMO** | 63,718 | 4,573 | -3998822.551904961 | -50.17419408734025 | |
+| **PaedOx ISDA** | 2,222,127 | 4,572 | -4005889.66636264 | -28.038084931308095 | |
 | **PaedOx QP** | 7,861 | 4,573 | -3998822.592545736 | -50.17239936999981 | Polish unsuccessful
 | **MATLAB L1QP** | 4 | 979 | 1.291016323602368e-17 | -1.000070397747272* | Solve failed
 
