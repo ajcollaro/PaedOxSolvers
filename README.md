@@ -172,11 +172,11 @@ PaedOx QP is available as of Version 6.9 and supports the following types of SVM
 Comparisons to MATLAB L1QP (quadprog) and other methods are below. Note that MATLAB quadprog uses an interior point method for SVM and so operates differently to PaedOx QP.
 
 ### Algorithm
-PaedOx QP combines Alternating Direction Method of Multipliers (ADMM) and a post-solve polishing step and so is similar in spirit to [OSQP](https://osqp.org/). PaedOx QP supports box- and equality-constrained QPs.
+PaedOx QP combines Alternating Direction Method of Multipliers (ADMM) and a polishing step, and so is similar in spirit to [OSQP](https://osqp.org/). PaedOx QP supports box- and equality-constrained QPs.
 
 PaedOx QP is slower and more memory-intensive than decomposition methods such as SMO and ISDA, so it is not intended for large datasets. It is best suited to problems with at most a few thousand training examples. For smaller datasets, it can produce solutions with strong primal feasibility and near machine-precision optimality.
 
-An initial ADMM-based QP solve runs until both primal and dual residuals fall below a set tolerance. This solution is used to infer which variables are active at the box bounds, after which a reduced equality-constrained QP is solved over the remaining free variables. This polishing step typically improves the solution to near machine precision. The polished solution is accepted only if all variables remain within the box constraints and both the primal and dual residuals are no larger than those of pre-polished solution.
+PaedOx QP solves iterateively until primal and dual residuals are simultaneously below a set tolerance. This is used to infer which coordinates are at the box bounds, after which a reduced equality-constrained QP is solved over the remaining free variables. This polishing step improves the solution to near machine precision. Polishing is successful if (1) all coordinates remain within the box, and (2) both primal and dual residuals are less than those of pre-polished solution. If polishing is not successful, the pre-polished solution is used instead.
 
 ### Experiment 4
 This experiment runs PaedOx QP on the problem posed in Experiment 3. Other solver results are re-used.
