@@ -1,0 +1,37 @@
+regressionSVM = fitrsvm(...
+    data, ...
+    y, ...
+    'KernelFunction', 'gaussian', ...
+    'BoxConstraint', 10, ...
+    'KernelScale', 10, ...
+    'Epsilon', 1, ...
+    'Standardize', true, ...
+    'Verbose', 2, ...
+    'Solver', 'L1QP');
+
+ Iter            Fval  Primal Infeas    Dual Infeas  Complementarity  
+    0    4.976508e+04   1.287054e+03   3.107403e+02     8.478080e+00  
+    1    4.470737e+03   3.339882e+02   1.243057e+02     1.388653e+01  
+    2    2.198457e+03   2.791196e+02   1.090491e+02     1.218658e+01  
+    3   -5.090426e+03   1.227901e+02   5.049235e+01     6.526323e+00  
+    4   -7.351863e+03   6.322300e+01   2.581939e+01     3.102046e+00  
+    5   -8.710362e+03   2.899062e+01   1.102596e+01     1.168334e+00  
+    6   -9.447261e+03   4.561166e+00   1.848859e+00     3.002371e-01  
+    7   -9.623569e+03   1.017390e+00   4.144509e-01     6.672205e-02  
+    8   -9.671691e+03   1.421373e-02   7.939338e-03     7.082959e-03  
+    9   -9.676381e+03   7.024269e-05   6.000380e-05     1.046824e-03  
+   10   -9.676636e+03   7.684807e-07   6.797751e-07     1.531573e-04  
+   11   -9.676641e+03   4.303365e-09   3.807542e-09     2.159997e-05  
+   12   -9.676641e+03   6.821210e-13   6.557215e-12     2.876883e-06  
+   13   -9.676641e+03   2.501110e-12   2.216740e-12     2.952298e-07  
+   14   -9.676641e+03   6.821210e-13   2.648434e-12     6.034721e-09  
+
+<a href = "matlab: helpview('optim','quadprogipc_min_found','CSHelpWindow');">Minimum found that satisfies the constraints</a>.
+
+Optimization completed because the objective function is non-decreasing in 
+<a href = "matlab: helpview('optim','quadprog_feasible_direction','CSHelpWindow');">feasible directions</a>, to within the value of the <a href = "matlab: helpview('optim','optimality_tolerance_msgcsh','CSHelpWindow');">optimality tolerance</a>,
+and constraints are satisfied to within the value of the <a href = "matlab: helpview('optim','constraint_tolerance','CSHelpWindow');">constraint tolerance</a>.
+
+<<a href = "matlab: createExitMsg({'optimlib:ipqpcommon:Exit1basic'},{'optimlib:ipqpcommon:Exit1detailed','4.172734e-14','1.000000e-08','6.034721e-09','1.074714e-14','1.490116e-08'},true,true);;">stopping criteria details</a>>
+
+diary off
