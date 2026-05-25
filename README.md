@@ -174,13 +174,13 @@ Comparisons to MATLAB L1QP (quadprog) and other methods are below. Note that MAT
 ### Algorithm
 PaedOx QP combines Alternating Direction Method of Multipliers (ADMM) and a polishing solve, and so is similar in spirit to [OSQP](https://osqp.org/). PaedOx QP supports box- and equality-constrained QPs.
 
-PaedOx QP is slower and more memory-intensive than decomposition methods such as SMO and ISDA, so it is not intended for large datasets. It is best suited to problems with at most a few thousand training examples. For smaller datasets, it can produce solutions with strong primal feasibility and machine-precision optimality.
+PaedOx QP is more memory-heavy than decomposition methods such as SMO and ISDA, so it is not intended for large datasets. It is best suited to problems with at most a few thousand training examples. For smaller datasets, it can produce solutions with strong primal feasibility and machine-precision optimality.
 
 PaedOx QP solves iterateively until primal and dual residuals are simultaneously less than a preset tolerance. This is used to infer which coordinates are at the box bounds, after which a reduced equality-constrained QP is solved over the remaining free variables. This polishing step improves the solution to machine precision. Polishing is successful if (1) all coordinates remain within the box, and (2) both primal and dual residuals are less than those of solution prior to polishing. If polishing is not successful, the solution prior to polishing is used instead.
 
 ### Experiment 4
 This experiment runs PaedOx QP on the problem posed in Experiment 3. Other solver results are re-used.
-- Stopping critierion (PaedOx QP): ‖x<sup>k+1</sup> − z<sup>k+1</sup>‖<sub>∞</sub> ≤ 10<sup>−3</sup> and ρ ‖z<sup>k+1</sup> − z<sup>k</sup>‖<sub>∞</sub> ≤ 10<sup>−3</sup>
+- Stopping critierion (PaedOx QP): ‖x<sup>k+1</sup> − z<sup>k+1</sup>‖<sub>∞</sub> < 0.001 and ρ ‖z<sup>k+1</sup> − z<sup>k</sup>‖<sub>∞</sub> < 0.001
 
 #### Results
 Outputs for MATLAB ISDA, PaedOx ISDA, and PaedOx SMO are located within the 'Experiment 3' folder. PaedOx QP results are located within the 'Experiment 4' folder.
@@ -221,7 +221,7 @@ Outputs are located within the 'Experiment 5' folder. Middle portions of PaedOx 
 | **PaedOx SMO** | 63,718 | 4,573 | -3998822.551904961 | -50.17419408734025 | |
 | **PaedOx ISDA** | 2,222,127 | 4,572 | -4005889.66636264 | -28.038084931308095 | |
 | **PaedOx QP** | 7,861 | 4,573 | -3998822.592545736 | -50.17239936999981 | Polish unsuccessful
-| **MATLAB L1QP** | 4 | 979 | 1.291016323602368e-17 | -1.000070397747272* | Solve failed
+| **MATLAB L1QP** | 4 | 979 | 1.291016323602368e-17 | -1.000070397747272* | Failed
 
 <sub>*MATLAB b converted to ρ.</sub>
 
@@ -229,7 +229,7 @@ ISDA objective values differ from other methods as the problem is posed differen
 
 SMO solvers and PaedOx QP provide good solutions. PaedOx QP introduced a box violation during polishing and so the pre-polished solution was accepted and reported.
 
-MATLAB L1QP (quadprog) converged to a degenerate near-zero QP objective and so may not be suitable for large kernel SVR.
+MATLAB L1QP (quadprog) converged to a degenerate near-zero QP objective and so so may not be suitable for large kernel SVR.
 
 ## Outlier detection using One-Class SVM / Support Vector Clustering (Experiment 6)
 This experiment is a head-to-head comparison using the large dataset from Experiment 5 to train an OC-SVM to identify outliers or anomalies. In this scenario, 5% of recordings are assumed to be outliers. PaedOx uses the rescaled formulation, where $0 \le \alpha_i \le 1$ and $\sum_{i=1}^{l} \alpha_i = \nu l$.
