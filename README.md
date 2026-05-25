@@ -119,7 +119,7 @@ MATLAB implements a similar ISDA-based solver. The below experiment uses an iden
 ### Algorithm
 PaedOx ISDA selects a single coordinate with the largest KKT violation and makes a 1D update each iteration until the maximum KKT violation is less than a preset tolerance. PaedOx implements caching of the Q matrix, and PaedOx ISDA does not implement shrinking.
 
-An explicit ρ is not learned, removing the equality constraint and enabling 1D updates. This makes the solver incompatible with OC-SVM. To alleviate the need for the learned function to pass through the origin, a constant equal to a fraction (1/10) of the mean of the Q diagonal is added to the Q matrix, which functions as an implicit, regularized ρ.<sup>3</sup> Once ISDA has converged, the resulting equivalent term is stored in ρ.
+Rho (ρ) is not learned explicitly, removing the equality constraint and enabling 1D updates. This makes the solver incompatible with OC-SVM. To incorporate ρ, a constant equal to a fraction (1/10) of the mean of the Q diagonal is added to the Q matrix.<sup>3</sup> Once ISDA has converged, the resulting equivalent term is stored in ρ.
 
 PaedOx ISDA 1D updates are faster than PaedOx SMO 2D updates, though many more iterations are typically required. It is a simpler, less constrained optimization, but is slower to converge, and so SMO is the recommended solver for most use-cases.
 
